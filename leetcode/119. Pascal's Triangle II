@@ -1,0 +1,20 @@
+//题目要去仅返回对应索引的向量
+//设置两个循环变量，i用于遍历rowIndex
+//j用来遍历更新需求的向量
+
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> res;
+        res.resize(rowIndex + 1);
+        res[0] = 1;
+        for(int i=0; i<=rowIndex; i++)
+        {
+            for(int j = i; j>0; j--)
+            {
+                res[j] = res[j] + res[j-1];
+            }
+        }
+        return res;
+    }
+};
