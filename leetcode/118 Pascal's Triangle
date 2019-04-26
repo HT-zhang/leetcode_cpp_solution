@@ -1,0 +1,21 @@
+//设立二维向量，先首尾等于1，再通过上个索引创建向量进行循环赋值
+
+vector<vector<int>> create_triangle(int n)
+{
+	vector<vector<int>>res(n, vector<int>());
+	int i = 0;
+	for(i=0; i<n; i++)
+	{
+		res[i].resize(i+1);
+		res[i][0] = 1;
+		res[i][i] = 1;
+	}
+	for(i=1; i<n; i++)
+	{
+		for(int j=1; j<i; j++)
+		{
+			res[i][j] = res[i-1][j] + res[i-1][j-1];
+		}
+	}
+	return res;
+}
