@@ -1,0 +1,60 @@
+题目描述：
+返回两个数组中的交集序列
+
+法1：哈希表
+先用哈希表遍历第一个数组，遍历第二个数组时，查看其哈希表中的值，如果大于0，则添加到返回向量中，并在表中减1
+
+#include <unordered_map>
+class Solution{
+public:
+    vector<int> intersect(vector<int>&nums1, vector<int>&nums2)
+    {
+        unordered_map<int, int>table;
+        vector<int>res;
+        for(auto a:nums1)
+        {
+            table[a]++;
+        }
+        for(auto a:nums2)
+        {
+            if(table[a] > 0)
+            {
+                res.push_back(a);
+                table[a]--;
+            }
+        }
+    }
+    return res;
+}
+
+
+法二 ：排序 双指针 
+先将两个序列进行排序，排序后，较小元素的指针往前挪动
+当元素相等时，就把该元素添加到最后的返回向量中g
+
+
+vector<int> intersection(vector<int> &nums1, vector<int>&nums2)
+{
+    sort(nums1.begin(), nums1.end());
+    sort(nums2.begin(), nums2.end());
+    int i = 0, j = 0;
+    vector<int>res;
+    while(i<nums1.size()&&j<nums2.size())
+    {
+        if (nums1[i] == nums2[j])
+        {
+            res.push_back(nums1[i]);
+            i++;
+            j++;
+        }
+        else if(nums[i] < nums2[j])
+        {
+            i++;
+        }
+        else
+        {
+            j++;
+        }
+    }
+    return res;
+}
