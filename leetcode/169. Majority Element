@@ -1,0 +1,30 @@
+#题目描述
+给定一个数组，仅有一个树的出现频率是超过一半
+返回给定数组中的众数 
+
+#思路
+采用字典对数组中的元素进行计数，遍历一次之后进行第二次遍历，查看其频数
+如果超过数组大小的一半，则返回元素
+
+class Solution {
+#include <unordered_map>
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        int index = 0;
+        unordered_map<int, int> counter;
+        for(int i = 0; i<n; i++)
+        {
+            counter[nums[i]] += 1;
+        }
+        for(int i = 0; i< n; i++)
+        {
+            if (counter[nums[i]] > n/2)
+            {
+                index = i;
+            }
+               
+        }
+        return nums[index];
+    }
+};
