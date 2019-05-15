@@ -1,0 +1,25 @@
+#题目描述：
+给定一个数组，返回该数组的最大子序和
+
+#思路：
+是动态规划的题，先用一个同样长度的数组进行初始化，然后确定其元素更新公式
+其元素更新公式为
+f[n] = f[n-1] > 0 ? f[n-1] + nums[i] : nums[i]
+由上述公式更新其元素，返回其中最大的元素，既是题目所求 
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        int glo_max = INT_MIN;
+        vector<int>f(n ,0);
+        f[0] = nums[0];
+        for(int i = 1; i<n ; i++)
+        {
+            f[i] = f[i-1] > 0? f[i-1] + nums[i] : nums[i];
+        }
+
+        return *std::max_element(f.begin(), f.end());
+    }
+};
