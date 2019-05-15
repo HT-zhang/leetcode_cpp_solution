@@ -1,0 +1,34 @@
+题目描述：
+
+针对与74题，矩阵的形状有些不同，表现如下
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+其同样是每行递增的，故可以与74题一样采用以行为循环做而二分查找
+但可看到 
+按列往下排，是递增，按行往右排，也是递增的
+故可以以右上角为开始 如果元素比目标值大，则列减1，如果元素比目标值小，则行数加1
+
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if (matrix.size() == 0 || matrix[0].size() == 0)
+            return false;
+        int i = 0, j = matrix[0].size()-1;
+        while(i<matrix.size() && j>=0)
+        {
+            if(target == matrix[i][j])
+                return true;
+            else if (target > matrix[i][j])
+                i = i+1;
+            else
+                j = j-1;
+        }
+        return false;
+    }
+};
+
